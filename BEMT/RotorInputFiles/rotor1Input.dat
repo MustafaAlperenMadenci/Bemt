@@ -1,0 +1,8 @@
+
+Label = MainRotor
+Collective_Deg = 6.8391911504812208
+LongCyc_Deg = 0.0
+LatCyc_Deg = 0.0
+
+N_Of_Elements = 10
+N_Of_Azimuths = 360

@@ -1,0 +1,48 @@
+
+!*General
+N_Of_Rotors = 1
+
+!!*Rotor
+
+Label = MainRotor
+RotorSolver_InputFile = RotorInputFiles/rotor1Input.dat
+N_Of_Blades = 5
+N_Of_Sections = 2
+Len_Blade = 6.70560
+Rotation_Speed = 200.0
+Hinge_Offset = 0.0
+BladeMassPerArea = 29.28860
+
+EarthToShaft_XRot_deg = 0.0
+EarthToShaft_YRot_deg = 0.0
+EarthToShaft_ZRot_deg = 0.0
+
+!!!*Section1
+Label = notmysection
+LStart = 0.0
+LEnd = 0.7
+TwStart = 0.0
+TwEnd = 0.0
+ChordStart_m = 0.304800
+ChordEnd_m = 0.304800
+ClSourceFile = airfoil/naca23012_cl.csv
+CdSourceFile = airfoil/naca23012_cd.csv
+CmSourceFile = airfoil/naca23012_cm.csv
+!!!-Section1
+
+!!!*Section2
+Label = notmysection
+LStart = 0.7
+LEnd = 1.0
+TwStart = 0.0
+TwEnd = 0.0
+ChordStart_m = 0.304800
+ChordEnd_m = 0.304800
+ClSourceFile = airfoil/naca23012_cl.csv
+CdSourceFile = airfoil/naca23012_cd.csv
+CmSourceFile = airfoil/naca23012_cm.csv
+!!!-Section2
+
+!!-Rotor
+
+!-General
