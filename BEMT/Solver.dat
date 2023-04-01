@@ -1,6 +1,6 @@
 ModelType = Rotor
-ModelFile = IsolatedRotorModel.rmodel
+ModelFile = ModelFiles/IsolatedRotorModel.rmodel
 SolverType = Steady
-EnviromentFile = GlobalVariables.dat
+EnviromentFile = GlobalVariables/GlobalVariables.dat
 RotorSolverInputFile = RotorInputFiles/IsolatedRotorModel.input
 
