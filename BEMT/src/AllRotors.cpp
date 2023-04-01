@@ -111,11 +111,6 @@ void AllRotors::readAllRotorsData(const std::string& fileName) {
                             myRotor->Label = stringVal;
                             std::cout << "Rotor Name is : " << myRotor->Label << std::endl;
                         }
-                        else if (idef == "RotorSolver_InputFile") {
-                            iss3 >> equalSign >> stringVal;
-                            myRotor->inputFileName = stringVal;
-                            std::cout << myRotor->Label << " input file is : " << myRotor->inputFileName << std::endl;
-                        }
                         else if (idef == "N_Of_Blades") {
                             iss3 >> equalSign >> intVal;
                             myRotor->nOfBlades = intVal;
@@ -163,6 +158,16 @@ void AllRotors::readAllRotorsData(const std::string& fileName) {
                             myRotor->etoshZ_deg = doubleVal;
                             std::cout << "Earth to shaft Z rotation is = " << myRotor->etoshZ_deg << std::endl;
                             myRotor->etoshZ_rad = (myRotor->etoshZ_deg / 180.0) * M_PI;
+                        }
+                        else if (idef == "N_Of_SolutionElements") {
+                            iss3 >> equalSign >> intVal;
+                            myRotor->nOfSolutionElements = intVal;
+                            std::cout << "Number of solution elements is = " << myRotor->nOfSolutionElements << std::endl;
+                        }
+                        else if (idef == "N_Of_SolutionAzimuths") {
+                            iss3 >> equalSign >> intVal;
+                            myRotor->nOfSolutionAzimuths = intVal;
+                            std::cout << "Number of solution azimuths is = " << myRotor->nOfSolutionAzimuths << std::endl;
                         }
                         else if (idef[0] == '!' && idef[1] == '!' && idef[2] == '!' && idef[3] == '*') {
                             std::cout << "Reading the Section info..." << std::endl;

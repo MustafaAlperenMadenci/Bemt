@@ -13,13 +13,15 @@ void SolRotor::rotorAreaCalc()
     rotorArea_m2 = M_PI * lenBlade * lenBlade;
 }
 
-void SolRotor::readRotorInputs(const std::string& filename)
+void SolRotor::readRotorInputs()
 {
+    std::string filename = inputFileName;
     std::ifstream inputFile(filename);
     if (!inputFile.is_open()) {
         std::cout << "There is no file in given directory for rotor input file " << std::endl;
         std::cout << "Your current location is: " << std::endl;
         getCurrentWorkLoc();
+        exit(EXIT_FAILURE);
         return;
     }
     else {
@@ -59,21 +61,16 @@ void SolRotor::readRotorInputs(const std::string& filename)
                 this->latAngDeg = doubleVal;
                 this->latAngRad = (doubleVal / 180.0) * M_PI;
             }
-            else if (field_name == "N_Of_Elements") {
-                iss >> intVal;
-                this->nOfSection = intVal;
-            }
-            else if (field_name == "N_Of_Azimuths") {
-                iss >> intVal;
-                this->nOfAzimuth = intVal;
-            }
+
         }
     }
 }
 
 
 void SolRotor::setVals(const Rotor& myRot) { // class oluþturulduðunda bunlarý doldurcak þekilde olmalý
-    readRotorInputs(myRot.inputFileName);
+    //readRotorInputs(myRot.inputFileName);
+    this->nOfSection = myRot.nOfSolutionElements;
+    this->nOfAzimuth = myRot.nOfSolutionAzimuths;
     rotSpeedRps = myRot.RotationSpeed * (2 * M_PI) / 60.0;
     shaftAngularSpeed_rads.z = rotSpeedRps;  // Vector in shaft axis NOT IN EARTH AXIS !!!
     dt = (2 * M_PI / nOfAzimuth) / rotSpeedRps;
@@ -88,6 +85,7 @@ void SolRotor::setVals(const Rotor& myRot) { // class oluþturulduðunda bunlarý d
     etoshX_rad = myRot.etoshX_rad;
     etoshY_rad = myRot.etoshY_rad;
     etoshZ_rad = myRot.etoshZ_rad;
+
     elemWidth_nd = (1.0) / nOfSection;
     elemWidth_m = elemWidth_nd * lenBlade;
 
@@ -383,6 +381,30 @@ void SolRotor::rotateRotor() {
     flapCheck_rad = flapEnd_rad - flap0_rad;
     flapRateCheck_rads = flapRateEnd_rads - flapRate0_rads;
     indLambCheck_nd = indLamb0_nd - indLambEnd_nd;
+
+}
+
+void SolRotor::rotateSteadyRotor() {
+    double* vars_pointers[maxD]{ nullptr };
+    double* target_pointers[maxD]{ nullptr };
+    double targetVals[maxD]{ 0.0 };
+    double vars_init[maxD]{ 0.0 };
+    int dim = 3;
+
+    vars_pointers[0] = &(this->flap0_rad);
+    vars_pointers[1] = &(this->flapRate0_rads);
+    vars_pointers[2] = &(this->indLamb0_nd);
+    target_pointers[0] = &(this->flapCheck_rad);
+    target_pointers[1] = &(this->flapRateCheck_rads);
+    target_pointers[2] = &(this->indLambCheck_nd);
+    targetVals[0] = 0.0;
+    targetVals[1] = 0.0;
+    targetVals[2] = 0.0;
+    vars_init[0] = -0.001;
+    vars_init[1] = -0.001;
+    vars_init[2] = 0.001;
+
+    newtonMain(&SolRotor::rotateRotor, vars_init, vars_pointers, target_pointers, targetVals, dim);
 
 }
 
@@ -802,29 +824,7 @@ double SolRotor::find2Norm(double fn[maxD], double* target_pointers[maxD],double
 
 
 
-void SolRotor::rotateSteadyRotor() {
-    double* vars_pointers[maxD]{nullptr};
-    double* target_pointers[maxD]{ nullptr };
-    double targetVals[maxD]{ 0.0 };
-    double vars_init[maxD]{ 0.0 };
-    int dim = 3;
 
-    vars_pointers[0] = &(this->flap0_rad);
-    vars_pointers[1] = &(this->flapRate0_rads);
-    vars_pointers[2] = &(this->indLamb0_nd);
-    target_pointers[0] = &(this->flapCheck_rad);
-    target_pointers[1] = &(this->flapRateCheck_rads);
-    target_pointers[2] = &(this->indLambCheck_nd);
-    targetVals[0] = 0.0;
-    targetVals[1] = 0.0;
-    targetVals[2] = 0.0;
-    vars_init[0] = -0.001;
-    vars_init[1] = -0.001;
-    vars_init[2] = 0.001;
-    
-    newtonMain(&SolRotor::rotateRotor, vars_init, vars_pointers, target_pointers, targetVals, dim);
-
-}
 
 void SolRotor::trimRotor() {
 

@@ -51,6 +51,9 @@
     <ClCompile Include="src\NewtonND.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SolverInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\BEMT.h">
@@ -90,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\NewtonND.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\SolverInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

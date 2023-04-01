@@ -26,6 +26,7 @@ private:
 
 public:
     std::string Label;
+    std::string inputFileName;
     int nOfSection = 0;
     int nOfAzimuth = 0;
     double hingeOffSet = 0.0;
@@ -126,7 +127,7 @@ public:
     void flapInertiaCalc();
     void elemAreaCalc();
     void rotorAreaCalc();
-    void readRotorInputs(const std::string& filename);
+    void readRotorInputs();
     void setVals(const Rotor& myRot);
 
 

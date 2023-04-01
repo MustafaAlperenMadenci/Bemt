@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\SolverInfo.cpp" />
     <ClCompile Include="src\AeroPolar.cpp" />
     <ClCompile Include="src\AllRotors.cpp" />
     <ClCompile Include="BEMT.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="headers\Rotor.h" />
     <ClInclude Include="headers\SolRotor.h" />
     <ClInclude Include="headers\Vector3D.h" />
+    <ClInclude Include="headers\SolverInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

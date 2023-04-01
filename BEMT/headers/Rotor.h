@@ -4,6 +4,8 @@ class Rotor
 public:
     int nOfBlades = 0;
     int nOfSections = 0;
+    int nOfSolutionElements = 0;
+    int nOfSolutionAzimuths = 0;
     double LenBlade = 0.0; // blade Length
     double RotationSpeed = 0.0; //rpm
     double bladeMassPerArea_kgm2 = 0.0;
@@ -17,7 +19,7 @@ public:
 
 
     std::string Label; // Label Of the Rotor
-    std::string inputFileName;
+    //std::string inputFileName;
     std::vector<BladeSection> sections;
 };
 

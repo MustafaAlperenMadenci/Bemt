@@ -1,8 +1,0 @@
-
-Label = SecondRotor
-Collective_Deg = 10.0
-LongCyc_Deg = 0.0
-LatCyc_Deg = 5.0
-
-N_Of_Elements = 10
-N_Of_Azimuths = 360
