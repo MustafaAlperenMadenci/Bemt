@@ -970,6 +970,13 @@ double SolRotor::find2Norm(double fn[maxD], double* target_pointers[maxD],double
 
 
 
+void SolRotor::dummy2Method() {
+    
+    NewtonND NewtonRaphsonSolver;
+    double Init_Input[3] = { -0.001,-0.001,0.001 };
+    NewtonRaphsonSolver.newtonMain([&](double in[], double out[]) { this->rotateSolRot(in, out); }, Init_Input, 3);
+}
+
 void SolRotor::rotateSteadyRotor() {
     double* vars_pointers[maxD]{nullptr};
     double* target_pointers[maxD]{ nullptr };
