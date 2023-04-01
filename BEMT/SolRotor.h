@@ -130,15 +130,11 @@ public:
     void setVals(const Rotor& myRot);
 
 
-    void rotateSolRot(double input[3], double output[3]);
     void rotateRotor();
     void rotateSteadyRotor();
     void uniformInducedFormula();
     void uniformInducedCalculator();
-    void silBunu();
-    double dummyFunc(double inin ,double target);
-    void dummy2Method();
-    void trimRotorDummy();
+    void trimRotor();
     
     void integrateForceMoment();
     void saveSummaryData();
