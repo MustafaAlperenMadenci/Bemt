@@ -968,27 +968,7 @@ double SolRotor::find2Norm(double fn[maxD], double* target_pointers[maxD],double
 }
 
 
-//double SolRotor::dummyFunc(double inin, double target) {
-//
-//    this->colAngRad = inin;
-//    this->colAngDeg = inin * 180.0 / M_PI;
-//
-//    double Solved_Input[3] = { 0.0, 0.0, 0.0 };
-//    double Output[3];
-//    NewtonND NewtonRaphsonSolver;
-//    double Init_Input[3] = { -0.001,-0.001,0.001 };
-//    NewtonRaphsonSolver.newtonMain([&](double in[], double out[]) { this->rotateSolRot(in, out); }, Init_Input, 3);
-//    Solved_Input[0] = NewtonRaphsonSolver.xSol[0]; Solved_Input[1] = NewtonRaphsonSolver.xSol[1]; Solved_Input[2] = NewtonRaphsonSolver.xSol[2];
-//    double outout = (this->totalLiftOnHinge.z + this->totalDragOnHinge.z) - target;
-//    return outout;
-//}
 
-void SolRotor::dummy2Method() {
-    
-    NewtonND NewtonRaphsonSolver;
-    double Init_Input[3] = { -0.001,-0.001,0.001 };
-    NewtonRaphsonSolver.newtonMain([&](double in[], double out[]) { this->rotateSolRot(in, out); }, Init_Input, 3);
-}
 
 void SolRotor::rotateSteadyRotor() {
     double* vars_pointers[maxD]{nullptr};
