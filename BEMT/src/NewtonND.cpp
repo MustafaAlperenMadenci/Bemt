@@ -1,4 +1,4 @@
-#include "BEMT.h"
+#include "../headers/BEMT.h"
 
 void NewtonND::find_jacobiansND(std::function<void(double[], double[])> func)
 {

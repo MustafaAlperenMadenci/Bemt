@@ -93,6 +93,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,6 +126,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,33 +137,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AeroPolar.cpp" />
-    <ClCompile Include="AllRotors.cpp" />
+    <ClCompile Include="src\AeroPolar.cpp" />
+    <ClCompile Include="src\AllRotors.cpp" />
     <ClCompile Include="BEMT.cpp" />
-    <ClCompile Include="BladeSection.cpp" />
-    <ClCompile Include="GlobalVars.cpp" />
-    <ClCompile Include="Newton1D.cpp" />
-    <ClCompile Include="Newton3D.cpp" />
-    <ClCompile Include="Newton4D.cpp" />
-    <ClCompile Include="NewtonND.cpp" />
-    <ClCompile Include="Rotor.cpp" />
-    <ClCompile Include="SolRotor.cpp" />
-    <ClCompile Include="Vector3D.cpp" />
+    <ClCompile Include="src\BladeSection.cpp" />
+    <ClCompile Include="src\GlobalVars.cpp" />
+    <ClCompile Include="src\Newton1D.cpp" />
+    <ClCompile Include="src\Newton3D.cpp" />
+    <ClCompile Include="src\Newton4D.cpp" />
+    <ClCompile Include="src\NewtonND.cpp" />
+    <ClCompile Include="src\Rotor.cpp" />
+    <ClCompile Include="src\SolRotor.cpp" />
+    <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AeroPolar.h" />
-    <ClInclude Include="AllRotors.h" />
-    <ClInclude Include="BEMT.h" />
-    <ClInclude Include="BladeSection.h" />
-    <ClInclude Include="GeneralFuncs.h" />
-    <ClInclude Include="GlobalVars.h" />
-    <ClInclude Include="Newton1D.h" />
-    <ClInclude Include="Newton3D.h" />
-    <ClInclude Include="Newton4D.h" />
-    <ClInclude Include="NewtonND.h" />
-    <ClInclude Include="Rotor.h" />
-    <ClInclude Include="SolRotor.h" />
-    <ClInclude Include="Vector3D.h" />
+    <ClInclude Include="headers\AeroPolar.h" />
+    <ClInclude Include="headers\AllRotors.h" />
+    <ClInclude Include="headers\BEMT.h" />
+    <ClInclude Include="headers\BladeSection.h" />
+    <ClInclude Include="headers\GeneralFuncs.h" />
+    <ClInclude Include="headers\GlobalVars.h" />
+    <ClInclude Include="headers\Newton1D.h" />
+    <ClInclude Include="headers\Newton3D.h" />
+    <ClInclude Include="headers\Newton4D.h" />
+    <ClInclude Include="headers\NewtonND.h" />
+    <ClInclude Include="headers\Rotor.h" />
+    <ClInclude Include="headers\SolRotor.h" />
+    <ClInclude Include="headers\Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
-#include "BEMT.h"
+#include "../headers/BEMT.h"
 
 void AllRotors::textToStruct(std::string filename, AeroPolar* targetPolar, std::string rotorLabel, std::string sectionLabel) {
     char* endp;

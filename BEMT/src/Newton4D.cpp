@@ -1,4 +1,4 @@
-#include "BEMT.h"
+#include "../headers/BEMT.h"
 
 void Newton4D::find_jacobians4D(std::function<void(double[], double[])> func, double f_res0[4], double x[4], double jacMat[4][4])
 {

@@ -1,4 +1,4 @@
-#include "BEMT.h"
+#include "../headers/BEMT.h"
 
 
 void Newton1D::NewtonRaphson(std::function<double(double)> func, double x0)

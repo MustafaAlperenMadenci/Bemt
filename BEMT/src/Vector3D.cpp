@@ -1,4 +1,4 @@
-#include "BEMT.h"
+#include "../headers/BEMT.h"
 
 Vector3D::Vector3D() {
     x = 0.0;

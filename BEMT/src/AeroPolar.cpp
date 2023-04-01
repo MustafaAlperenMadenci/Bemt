@@ -1,4 +1,4 @@
-#include "BEMT.h"
+#include "../headers/BEMT.h"
 
 
 void AeroPolar::InterpolatePolar(const AeroPolar& polar1, double polar1Weight,const AeroPolar& polar2, double polar2Weight, AeroPolar& targetPolar)

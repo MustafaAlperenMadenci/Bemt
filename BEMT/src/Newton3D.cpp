@@ -1,4 +1,4 @@
-#include "BEMT.h"
+#include "../headers/BEMT.h"
 
 
 void Newton3D::find_jacobians3D(std::function<void(double[], double[])> func)

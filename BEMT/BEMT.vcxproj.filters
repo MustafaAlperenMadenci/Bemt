@@ -18,78 +18,78 @@
     <ClCompile Include="BEMT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AeroPolar.cpp">
+    <ClCompile Include="src\AeroPolar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BladeSection.cpp">
+    <ClCompile Include="src\BladeSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rotor.cpp">
+    <ClCompile Include="src\Rotor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AllRotors.cpp">
+    <ClCompile Include="src\AllRotors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SolRotor.cpp">
+    <ClCompile Include="src\SolRotor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Newton3D.cpp">
+    <ClCompile Include="src\Newton3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Newton1D.cpp">
+    <ClCompile Include="src\Newton1D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vector3D.cpp">
+    <ClCompile Include="src\Vector3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GlobalVars.cpp">
+    <ClCompile Include="src\GlobalVars.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Newton4D.cpp">
+    <ClCompile Include="src\Newton4D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NewtonND.cpp">
+    <ClCompile Include="src\NewtonND.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BEMT.h">
+    <ClInclude Include="headers\BEMT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AeroPolar.h">
+    <ClInclude Include="headers\AeroPolar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BladeSection.h">
+    <ClInclude Include="headers\BladeSection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rotor.h">
+    <ClInclude Include="headers\Rotor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AllRotors.h">
+    <ClInclude Include="headers\AllRotors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneralFuncs.h">
+    <ClInclude Include="headers\GeneralFuncs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SolRotor.h">
+    <ClInclude Include="headers\SolRotor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Newton3D.h">
+    <ClInclude Include="headers\Newton3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Newton1D.h">
+    <ClInclude Include="headers\Newton1D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3D.h">
+    <ClInclude Include="headers\Vector3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalVars.h">
+    <ClInclude Include="headers\GlobalVars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Newton4D.h">
+    <ClInclude Include="headers\Newton4D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NewtonND.h">
+    <ClInclude Include="headers\NewtonND.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
