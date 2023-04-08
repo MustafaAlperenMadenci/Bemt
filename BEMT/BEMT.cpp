@@ -1,5 +1,7 @@
 #include "./headers/BEMT.h"
 
+//On my second computer i wrote this.
+
 void getSolverInfo(SolverInfo& solverInfoInstance)
 {
     std::string input;
