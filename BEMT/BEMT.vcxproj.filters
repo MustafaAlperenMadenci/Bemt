@@ -98,5 +98,8 @@
     <ClInclude Include="headers\SolverInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\TrimVariablesInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

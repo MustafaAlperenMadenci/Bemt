@@ -26,7 +26,13 @@ private:
 
 public:
     std::string Label;
+    std::string solverType;
     std::string inputFileName;
+    std::string trimInputFileName;
+    std::string trimVariablesFileName;
+    std::string trimTargetsFileName;
+    std::array<TrimVariable, 5> TrimVariablesArray;
+    int TrimVariablesSize = 0;
     int nOfSection = 0;
     int nOfAzimuth = 0;
     double hingeOffSet = 0.0;
@@ -128,6 +134,8 @@ public:
     void elemAreaCalc();
     void rotorAreaCalc();
     void readRotorInputs();
+    void readTrimInputFile();
+    void readTrimVariables();
     void setVals(const Rotor& myRot);
 
 

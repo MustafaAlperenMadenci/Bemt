@@ -23,12 +23,36 @@ void getRotorsInfo(AllRotors& AllRotorsInstance, std::string& SourceFile)
 void prepareSolutionRotor(Rotor& rotor, SolverInfo& solverInfoInstance, SolRotor& solrotor)
 {
     solrotor.setVals(rotor);
-    solrotor.inputFileName = solverInfoInstance.RotorSolverInputFileStr;
+
+    if (solverInfoInstance.SolverTypeStr == "Steady")
+    {
+        solrotor.inputFileName = solverInfoInstance.RotorSolverInputFileStr;
+        solrotor.readRotorInputs();
+        if (solrotor.solverType != "Steady")
+        {
+            std::cout << "Solver Type and Solver Input Files are incompatible.." << std::endl;
+            exit(EXIT_FAILURE);
+        }
+    }
+    else if (solverInfoInstance.SolverTypeStr == "Trim")
+    {
+        solrotor.trimInputFileName = solverInfoInstance.RotorSolverInputFileStr;
+        solrotor.readTrimInputFile();
+        if (solrotor.solverType != "Trim")
+        {
+            std::cout << "Solver Type and Solver Input Files are incompatible.." << std::endl;
+            exit(EXIT_FAILURE);
+        }
+        solrotor.readTrimVariables();
+
+    }
+    
 }
 void solveSolutionRotor(SolRotor& solrotor)
 {
+
     auto start2 = high_resolution_clock::now();
-    solrotor.readRotorInputs();
+    //solrotor.readRotorInputs();
     solrotor.rotateSteadyRotor();
     auto stop2 = high_resolution_clock::now();
     auto duration2 = duration_cast<microseconds>(stop2 - start2);

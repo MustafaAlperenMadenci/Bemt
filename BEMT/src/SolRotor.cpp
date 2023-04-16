@@ -46,6 +46,11 @@ void SolRotor::readRotorInputs()
                 iss >> stringVal;
                 this->Label = stringVal;
             }
+            else if (field_name == "SolverType")
+            {
+                iss >> stringVal;
+                this->solverType = stringVal;
+            }
             else if (field_name == "Collective_Deg") {
                 iss >> doubleVal;
                 this->colAngDeg = doubleVal;
@@ -64,6 +69,132 @@ void SolRotor::readRotorInputs()
 
         }
     }
+}
+
+void SolRotor::readTrimInputFile()
+{
+    std::string filename = trimInputFileName;
+    std::ifstream inputFile(filename);
+    if (!inputFile.is_open()) {
+        std::cout << "There is no file in given directory for trim input file " << std::endl;
+        std::cout << "Your current location is: " << std::endl;
+        getCurrentWorkLoc();
+        exit(EXIT_FAILURE);
+        return;
+    }
+    else {
+        std::cout << "Trim variables and trim target files are going to be saved ..." << std::endl;
+        getCurrentWorkLoc();
+    }
+    std::string line;
+    char separator = '=';
+    std::string stringVal;
+
+    while (std::getline(inputFile, line)) {
+        if (line.empty()) {
+            continue;
+        }
+        std::istringstream iss(line);
+        std::string field_name;
+        if (std::getline(iss, field_name, separator)) {
+            string_trim(field_name);
+            if (field_name == "SolverType") {
+                iss >> stringVal;
+                this->solverType = stringVal;
+            }
+            else if (field_name == "TrimVariablesFile")
+            {
+                iss >> stringVal;
+                this->trimVariablesFileName = stringVal;
+            }
+            else if (field_name == "TrimTargetsFile") {
+                iss >> stringVal;
+                this->trimTargetsFileName = stringVal;
+            }
+        }
+    }
+}
+
+void SolRotor::readTrimVariables()
+{
+    std::string filename = trimVariablesFileName;
+    std::ifstream inputFile(filename);
+    if (!inputFile.is_open()) {
+        std::cout << "There is no file in given directory for trim variables file " << std::endl;
+        std::cout << "Your current location is: " << std::endl;
+        getCurrentWorkLoc();
+        exit(EXIT_FAILURE);
+        return;
+    }
+    else {
+        std::cout << "Trim variables are being read ..." << std::endl;
+        getCurrentWorkLoc();
+    }
+
+    std::string line;
+    char separator = ',';
+    std::string stringVal;
+    int intVal = 0;
+    double doubleVal = 0.0;
+    int varCount = 0;
+    std::getline(inputFile, line); // skip header line
+
+    while (std::getline(inputFile, line)) {
+        if (line.empty()) {
+            continue;
+        }
+        std::istringstream iss(line);
+        
+        std::getline(iss, stringVal, separator);
+        string_trim(stringVal);
+        intVal = std::stoi(stringVal);
+        if (intVal == 1)
+        {
+            std::getline(iss, stringVal, separator);
+            string_trim(stringVal);
+            if (stringVal == "Collective_Deg")
+            {
+                TrimVariablesArray[varCount].varPtr = &(this->colAngRad);
+            }
+            else if (stringVal == "LongCyc_Deg")
+            {
+                TrimVariablesArray[varCount].varPtr = &(this->lonAngRad);
+            }
+            else if (stringVal == "LatCyc_Deg")
+            {
+                TrimVariablesArray[varCount].varPtr = &(this->latAngRad);
+            }
+            else
+            {
+                std::cout << "Invalid trim variable name ... Exiting!";
+                exit(EXIT_FAILURE);
+            }
+
+            std::getline(iss, stringVal, separator);
+            string_trim(stringVal);
+            doubleVal = std::stod(stringVal);
+            TrimVariablesArray[varCount].initialVal = doubleVal;
+            
+            std::getline(iss, stringVal, separator);
+            string_trim(stringVal);
+            doubleVal = std::stod(stringVal);
+            TrimVariablesArray[varCount].minLimVal = doubleVal;
+
+            std::getline(iss, stringVal, separator);
+            string_trim(stringVal);
+            doubleVal = std::stod(stringVal);
+            TrimVariablesArray[varCount].maxLimVal = doubleVal;
+
+            varCount++;
+            
+        }
+        else {
+            continue;
+        }
+
+    }
+
+    this->TrimVariablesSize = varCount;
 }
 
 

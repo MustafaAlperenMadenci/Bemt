@@ -1,0 +1,5 @@
+SolverType = Trim
+
+TrimVariablesFile = RotorInputFiles/TrimInputFiles/TrimVariables.dat
+
+TrimTargetsFile = RotorInputFiles/TrimInputFiles/TrimTargets.dat

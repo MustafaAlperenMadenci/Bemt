@@ -164,6 +164,7 @@
     <ClInclude Include="headers\NewtonND.h" />
     <ClInclude Include="headers\Rotor.h" />
     <ClInclude Include="headers\SolRotor.h" />
+    <ClInclude Include="headers\TrimVariablesInfo.h" />
     <ClInclude Include="headers\Vector3D.h" />
     <ClInclude Include="headers\SolverInfo.h" />
   </ItemGroup>
