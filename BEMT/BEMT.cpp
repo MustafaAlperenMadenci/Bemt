@@ -44,31 +44,42 @@ void prepareSolutionRotor(Rotor& rotor, SolverInfo& solverInfoInstance, SolRotor
             exit(EXIT_FAILURE);
         }
         solrotor.readTrimVariables();
+        solrotor.readTrimTargets();
 
     }
     
 }
 void solveSolutionRotor(SolRotor& solrotor)
 {
-
     auto start2 = high_resolution_clock::now();
-    //solrotor.readRotorInputs();
-    solrotor.rotateSteadyRotor();
+
+    if (solrotor.solverType == "Steady")
+    {
+        std::cout << "Steady analysis is running ..." << std::endl;
+        solrotor.rotateSteadyRotor();
+        std::cout << "Steady analysis is done ..." << std::endl;
+    }
+    else if (solrotor.solverType == "Trim")
+    {
+        std::cout << "Trim analysis is running ..." << std::endl;
+        //solrotor.rotateSteadyRotor();
+        std::cout << "Trim analysis is done ..." << std::endl;
+    }
     auto stop2 = high_resolution_clock::now();
     auto duration2 = duration_cast<microseconds>(stop2 - start2);
     std::cout << duration2.count() << " microseconds" << std::endl;
-    if (1) {
-        solrotor.saveSummaryData();
-        solrotor.saveElem2DData();
-        solrotor.saveElem1DData();
-        solrotor.saveLiftVecElem();
-        solrotor.saveLiftVecShaft();
-        solrotor.saveDragVecElem();
-        solrotor.saveDragVecShaft();
-        solrotor.savePitchMomentVecElem();
-        solrotor.savePitchMomentVecShaft();
-        solrotor.saveMomentVecShaft();
-    }
+
+
+    solrotor.saveSummaryData();
+    solrotor.saveElem2DData();
+    solrotor.saveElem1DData();
+    solrotor.saveLiftVecElem();
+    solrotor.saveLiftVecShaft();
+    solrotor.saveDragVecElem();
+    solrotor.saveDragVecShaft();
+    solrotor.savePitchMomentVecElem();
+    solrotor.savePitchMomentVecShaft();
+    solrotor.saveMomentVecShaft();
 }
 
 int main()

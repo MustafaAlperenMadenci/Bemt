@@ -1,5 +1,7 @@
 SolverType = Trim
 
+Label = MainRotorTrim
+
 TrimVariablesFile = RotorInputFiles/TrimInputFiles/TrimVariables.dat
 
 TrimTargetsFile = RotorInputFiles/TrimInputFiles/TrimTargets.dat

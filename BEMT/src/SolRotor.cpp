@@ -102,6 +102,11 @@ void SolRotor::readTrimInputFile()
                 iss >> stringVal;
                 this->solverType = stringVal;
             }
+            else if (field_name == "Label")
+            {
+                iss >> stringVal;
+                this->Label = stringVal;
+            }
             else if (field_name == "TrimVariablesFile")
             {
                 iss >> stringVal;
@@ -195,6 +200,79 @@ void SolRotor::readTrimVariables()
     }
 
     this->TrimVariablesSize = varCount;
+}
+
+
+void SolRotor::readTrimTargets()
+{
+    std::string filename = trimTargetsFileName;
+    std::ifstream inputFile(filename);
+    if (!inputFile.is_open()) {
+        std::cout << "There is no file in given directory for trim targets file " << std::endl;
+        std::cout << "Your current location is: " << std::endl;
+        getCurrentWorkLoc();
+        exit(EXIT_FAILURE);
+        return;
+    }
+    else {
+        std::cout << "Trim targets are being read ..." << std::endl;
+        getCurrentWorkLoc();
+    }
+
+    std::string line;
+    char separator = ',';
+    std::string stringVal;
+    int intVal = 0;
+    double doubleVal = 0.0;
+    int varCount = 0;
+    std::getline(inputFile, line); // skip header line
+
+    while (std::getline(inputFile, line)) {
+        if (line.empty()) {
+            continue;
+        }
+        std::istringstream iss(line);
+
+        std::getline(iss, stringVal, separator);
+        string_trim(stringVal);
+        intVal = std::stoi(stringVal);
+        if (intVal == 1)
+        {
+            std::getline(iss, stringVal, separator);
+            string_trim(stringVal);
+            if (stringVal == "ForceShaft_X")
+            {
+                TrimTargetsArray[varCount].targetPtr = &(this->totalForceOnShaft.x);
+            }
+            else if (stringVal == "ForceShaft_Y")
+            {
+                TrimTargetsArray[varCount].targetPtr = &(this->totalForceOnShaft.y);
+            }
+            else if (stringVal == "ForceShaft_Z")
+            {
+                TrimTargetsArray[varCount].targetPtr = &(this->totalForceOnShaft.z);
+            }
+            else
+            {
+                std::cout << "Invalid trim target name ... Exiting!";
+                exit(EXIT_FAILURE);
+            }
+
+            std::getline(iss, stringVal, separator);
+            string_trim(stringVal);
+            doubleVal = std::stod(stringVal);
+            TrimTargetsArray[varCount].targetVal = doubleVal;
+
+            varCount++;
+
+        }
+        else {
+            continue;
+        }
+
+    }
+
+    this->TrimTargetsSize = varCount;
 }
 
 
@@ -982,6 +1060,36 @@ void SolRotor::trimRotor() {
     newtonMain(&SolRotor::rotateSteadyRotor, vars_init, vars_pointers, target_pointers, targetVals, dim);
 
     std::cout << "It is really messed up !!" << std::endl;
+}
+
+void SolRotor::trimRotorNew() {
+
+    double* vars_pointers[maxD]{ nullptr };
+    double* target_pointers[maxD]{ nullptr };
+    double targetVals[maxD]{ 0.0 };
+    double vars_init[maxD]{ 0.0 };
+    int dim = 0;
+    if (TrimVariablesSize != TrimTargetsSize)
+    {
+        std::cout << "Number of trim variables and number of trim targets should be equal !!! " << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        dim = TrimVariablesSize;
+    }
+
+
+    for (int i = 0; i < dim) {
+        vars_pointers[i] = TrimVariablesArray[i].varPtr;
+        vars_init[i] = TrimVariablesArray[i].initialVal;
+        target_pointers[i] = TrimTargetsArray[i].targetPtr;
+        targetVals[i] = TrimTargetsArray[i].targetVal;
+    }
+    
+    newtonMain(&SolRotor::rotateSteadyRotor, vars_init, vars_pointers, target_pointers, targetVals, dim);
+
+    std::cout << "New Trim Routine is done" << std::endl;
 }
 
 

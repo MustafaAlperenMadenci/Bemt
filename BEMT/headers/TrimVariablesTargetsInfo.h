@@ -10,3 +10,10 @@ public:
 	bool OnOff = false;
 	std::string varName;
 };
+
+class TrimTarget
+{
+public:
+	double* targetPtr = nullptr;
+	double targetVal = 0.0;
+};

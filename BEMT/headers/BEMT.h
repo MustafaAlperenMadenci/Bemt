@@ -15,7 +15,7 @@ using namespace std::chrono;
 #include <functional>
 #include <memory>
 
-#include "TrimVariablesInfo.h"
+#include "TrimVariablesTargetsInfo.h"
 #include "SolverInfo.h"
 #include "Vector3D.h"
 #include "GeneralFuncs.h"

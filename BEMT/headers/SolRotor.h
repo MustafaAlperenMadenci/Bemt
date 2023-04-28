@@ -28,11 +28,16 @@ public:
     std::string Label;
     std::string solverType;
     std::string inputFileName;
+    
     std::string trimInputFileName;
     std::string trimVariablesFileName;
     std::string trimTargetsFileName;
     std::array<TrimVariable, 5> TrimVariablesArray;
+    std::array<TrimTarget, 5> TrimTargetsArray;
     int TrimVariablesSize = 0;
+    int TrimTargetsSize = 0;
+
+
     int nOfSection = 0;
     int nOfAzimuth = 0;
     double hingeOffSet = 0.0;
@@ -136,6 +141,7 @@ public:
     void readRotorInputs();
     void readTrimInputFile();
     void readTrimVariables();
+    void readTrimTargets();
     void setVals(const Rotor& myRot);
 
 
@@ -144,6 +150,7 @@ public:
     void uniformInducedFormula();
     void uniformInducedCalculator();
     void trimRotor();
+    void trimRotorNew();
     
     void integrateForceMoment();
     void saveSummaryData();

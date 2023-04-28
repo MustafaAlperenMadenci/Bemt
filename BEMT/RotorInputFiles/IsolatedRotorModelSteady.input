@@ -1,5 +1,5 @@
 SolverType = Steady
-Label = MainRotor
+Label = MainRotorSteady
 Collective_Deg = 6.8391911504812208
 LongCyc_Deg = 0.0
 LatCyc_Deg = 0.0
