@@ -1,4 +1,4 @@
 OnOff, TrimVariable, InitialValue, MinimumValue, MaximumValue
-1,Collective_Deg, 3.0, -20.0, 20.0
-1,LongCyc_Deg, 0.0, -20.0, 20.0
-0,LatCyc_Deg, 0.0, -20.0, 20.0
+1,Collective_Deg, 0.01, -20.0, 20.0
+1,LongCyc_Deg, 0.01, -20.0, 20.0
+1,LatCyc_Deg, 0.01, -20.0, 20.0

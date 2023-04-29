@@ -3,4 +3,3 @@ ModelFile = ModelFiles/IsolatedRotorModel.rmodel
 EnviromentFile = GlobalVariables/GlobalVariables.dat
 SolverType = Trim
 RotorSolverInputFile = RotorInputFiles/IsolatedRotorModelTrim.input
-

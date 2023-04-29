@@ -149,7 +149,6 @@ public:
     void rotateSteadyRotor();
     void uniformInducedFormula();
     void uniformInducedCalculator();
-    void trimRotor();
     void trimRotorNew();
     
     void integrateForceMoment();
@@ -164,6 +163,8 @@ public:
     void saveMomentVecShaft();
     void saveElem2DData();
     void saveElem1DData();
+
+    void equateUnits();
 
 
 

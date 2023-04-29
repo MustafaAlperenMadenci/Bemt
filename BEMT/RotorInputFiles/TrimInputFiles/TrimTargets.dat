@@ -1,4 +1,4 @@
 OnOff, TrimTarget, TargetValue
-1, ForceShaft_X, 500.0
-1, ForceShaft_Y, 1000.0
-1, ForceShaft_Z, 2500.0
+1, ForceShaft_X, 1000.0
+1, ForceShaft_Y, 000.0
+1, ForceShaft_Z, 20000.0

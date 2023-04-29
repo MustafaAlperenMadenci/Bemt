@@ -1,5 +1,5 @@
 Temperature_C = 15.0
 Density_kgm3 = 1.225
-AirVelocityX_ms = 40.000
+AirVelocityX_ms = 0.000
 AirVelocityY_ms = 0.0
 AirVelocityZ_ms = 0.0

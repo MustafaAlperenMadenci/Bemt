@@ -649,6 +649,10 @@ void SolRotor::saveSummaryData()
         std::cerr << "Failed to open file " << solSumFileName << " for writing" << std::endl;
         return;
     }
+
+    outfile << "Collective Angle [deg] = " << colAngDeg << "\n";
+    outfile << "Longitudinal Cyclic Angle [deg] = " << lonAngDeg << "\n";
+    outfile << "Lateral Cyclic Angle [deg] = " << latAngDeg << "\n";
     outfile << "Total Lift Force in X Direction = " << totalLiftOnHinge.x << "\n";
     outfile << "Total Lift Force in Y Direction = " << totalLiftOnHinge.y << "\n";
     outfile << "Total Lift Force in Z Direction = " << totalLiftOnHinge.z << "\n";
@@ -857,6 +861,13 @@ void SolRotor::saveElem1DData()
     outfile.close();
 }
 
+void SolRotor::equateUnits()
+{
+    colAngDeg = colAngRad * 180.0 / M_PI;
+    lonAngDeg = lonAngRad * 180.0 / M_PI;
+    latAngDeg = latAngRad * 180.0 / M_PI;
+}
+
 void SolRotor::find_jacobiansND(void (SolRotor::* method)(), double* vars_pointers[maxD],
     double* target_pointers[maxD], double targetVals[maxD],int dim,
     double fn_jac[maxD][maxD], double fn[maxD], double jacMat[maxD][maxD])
@@ -954,7 +965,7 @@ void SolRotor::newtonMain(void (SolRotor::* method)(), double vars_init[maxD],
         
         if (find2Norm(fn, target_pointers, targetVals, dim) < tol) {
             //std::cout << "Norm2 is less than tolerance..." << std::endl;
-            std::cout << "Solution is found after " << iter << " iterations\n";
+            //std::cout << "Solution is found after " << iter << " iterations\n";
             for (int m = 0; m < dim; m++) {
                 xSol[m] = *(vars_pointers[m]);
             }
@@ -1033,35 +1044,6 @@ double SolRotor::find2Norm(double fn[maxD], double* target_pointers[maxD],double
 
 
 
-
-
-void SolRotor::trimRotor() {
-
-
-
-    double* vars_pointers[maxD]{ nullptr };
-    double* target_pointers[maxD]{ nullptr };
-    double targetVals[maxD]{ 0.0 };
-    double vars_init[maxD]{ 0.0 };
-    int dim = 3;
-    vars_pointers[0] = &(this->colAngRad);
-    vars_pointers[1] = &(this->lonAngRad);
-    vars_pointers[2] = &(this->latAngRad);
-    target_pointers[0] = &(this->totalForceOnShaft.z);
-    target_pointers[1] = &(this->totalForceOnShaft.x);
-    target_pointers[2] = &(this->totalForceOnShaft.y);
-    targetVals[0] = 22000.0;
-    targetVals[1] = 5000.0;
-    targetVals[2] = 2500.0;
-    vars_init[0] = 0.1;
-    vars_init[1] = 0.1;
-    vars_init[2] = 0.1;
-
-    newtonMain(&SolRotor::rotateSteadyRotor, vars_init, vars_pointers, target_pointers, targetVals, dim);
-
-    std::cout << "It is really messed up !!" << std::endl;
-}
-
 void SolRotor::trimRotorNew() {
 
     double* vars_pointers[maxD]{ nullptr };
@@ -1080,7 +1062,7 @@ void SolRotor::trimRotorNew() {
     }
 
 
-    for (int i = 0; i < dim) {
+    for (int i = 0; i < dim; i++) {
         vars_pointers[i] = TrimVariablesArray[i].varPtr;
         vars_init[i] = TrimVariablesArray[i].initialVal;
         target_pointers[i] = TrimTargetsArray[i].targetPtr;

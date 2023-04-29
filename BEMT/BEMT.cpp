@@ -62,14 +62,14 @@ void solveSolutionRotor(SolRotor& solrotor)
     else if (solrotor.solverType == "Trim")
     {
         std::cout << "Trim analysis is running ..." << std::endl;
-        //solrotor.rotateSteadyRotor();
+        solrotor.trimRotorNew();
         std::cout << "Trim analysis is done ..." << std::endl;
     }
     auto stop2 = high_resolution_clock::now();
     auto duration2 = duration_cast<microseconds>(stop2 - start2);
     std::cout << duration2.count() << " microseconds" << std::endl;
 
-
+    solrotor.equateUnits();
     solrotor.saveSummaryData();
     solrotor.saveElem2DData();
     solrotor.saveElem1DData();
@@ -104,7 +104,9 @@ int main()
 
     solveSolutionRotor(*MySolRotor);
 
-    MySolRotor->trimRotor();
+    //MySolRotor->trimRotor();
+    
+    
     //std::vector<SolRotor*> mySolRotors; // Burasý önemli, heape kaydediyor silindiðinden emin olunmalý.
     //
     //
