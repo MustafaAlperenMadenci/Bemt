@@ -11,7 +11,7 @@ private:
     double epsilon = 0.0001;
     void newtonMain(void (SolRotor::* method)(), double vars_init[maxD],
         double* vars_pointers[maxD], double* target_pointers[maxD], double targetVals[maxD],
-        int dim);
+        int dim, bool infoOut);
     void find_jacobiansND(void (SolRotor::* method)(), double* vars_pointers[maxD],
         double* target_pointers[maxD], double targetVals[maxD], int dim,
         double fn_jac[maxD][maxD], double fn[maxD], double jacMat[maxD][maxD]);

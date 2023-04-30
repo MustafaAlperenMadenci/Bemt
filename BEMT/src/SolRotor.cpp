@@ -157,15 +157,15 @@ void SolRotor::readTrimVariables()
         {
             std::getline(iss, stringVal, separator);
             string_trim(stringVal);
-            if (stringVal == "Collective_Deg")
+            if (stringVal == "Collective_Rad")
             {
                 TrimVariablesArray[varCount].varPtr = &(this->colAngRad);
             }
-            else if (stringVal == "LongCyc_Deg")
+            else if (stringVal == "LongCyc_Rad")
             {
                 TrimVariablesArray[varCount].varPtr = &(this->lonAngRad);
             }
-            else if (stringVal == "LatCyc_Deg")
+            else if (stringVal == "LatCyc_Rad")
             {
                 TrimVariablesArray[varCount].varPtr = &(this->latAngRad);
             }
@@ -446,7 +446,7 @@ void SolRotor::uniformInducedCalculator()
     targetVals[0] = 0.0;
     vars_init[0] = indLamb0_nd;
 
-    newtonMain(&SolRotor::uniformInducedFormula, vars_init, vars_pointers, target_pointers, targetVals, dim);
+    newtonMain(&SolRotor::uniformInducedFormula, vars_init, vars_pointers, target_pointers, targetVals, dim, false);
 
 }
 double inducedFinderResYedek(double vInd, double thrust, double rho, double area, double speed) {
@@ -613,7 +613,7 @@ void SolRotor::rotateSteadyRotor() {
     vars_init[1] = -0.001;
     vars_init[2] = 0.001;
 
-    newtonMain(&SolRotor::rotateRotor, vars_init, vars_pointers, target_pointers, targetVals, dim);
+    newtonMain(&SolRotor::rotateRotor, vars_init, vars_pointers, target_pointers, targetVals, dim, false);
 
 }
 
@@ -937,7 +937,7 @@ void SolRotor::cramerRuleND(double cramMat[maxD][maxD],double jacMat[maxD][maxD]
 
 void SolRotor::newtonMain(void (SolRotor::* method)(), double vars_init[maxD],
     double* vars_pointers[maxD], double* target_pointers[maxD], double targetVals[maxD],
-    int dim)
+    int dim, bool infoOut)
 {
     double x0[maxD]{ 0.0 };
     double fn[maxD]{ 0.0 };
@@ -960,9 +960,14 @@ void SolRotor::newtonMain(void (SolRotor::* method)(), double vars_init[maxD],
     for (int iter = 0; iter < max_iter; iter++) {
         // Call the function 
         (this->*method)();
-        for (int i = 0; i < dim; i++)
-            fn[i] = *(target_pointers[i]) - targetVals[i];
+
         
+        for (int i = 0; i < dim; i++)
+        {
+            fn[i] = *(target_pointers[i]) - targetVals[i];
+        }
+        
+
         if (find2Norm(fn, target_pointers, targetVals, dim) < tol) {
             //std::cout << "Norm2 is less than tolerance..." << std::endl;
             //std::cout << "Solution is found after " << iter << " iterations\n";
@@ -971,6 +976,25 @@ void SolRotor::newtonMain(void (SolRotor::* method)(), double vars_init[maxD],
             }
             numberOfIteration = iter;
             status = 1;
+            
+            if (infoOut)
+            {
+                std::cout << std::endl;
+                std::cout << "################################" << std::endl;
+                std::cout << std::endl;
+                for (int subi = 0; subi < dim; subi++)
+                {
+                    std::cout << subi + 1 << ". trim variable = " << *(vars_pointers[subi]) << std::endl;
+                }
+                for (int subi = 0; subi < dim; subi++)
+                {
+                    std::cout << subi + 1 << ". trim target = " << fn[subi] << std::endl;
+                }
+                std::cout << std::endl;
+                std::cout << "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" << std::endl;
+                std::cout << std::endl;
+            }
+
             return;
         }
 
@@ -993,6 +1017,26 @@ void SolRotor::newtonMain(void (SolRotor::* method)(), double vars_init[maxD],
         for (int subi = 0; subi < dim; subi++) {
             *(vars_pointers[subi]) = *(vars_pointers[subi]) + x0_diff[subi];
         }
+
+
+        if (infoOut)
+        {
+            std::cout << std::endl;
+            std::cout << "################################" << std::endl;
+            std::cout << std::endl;
+            for (int subi = 0; subi < dim; subi++)
+            {
+                std::cout << subi + 1 << ". trim variable = " << *(vars_pointers[subi]) << std::endl;
+            }
+            for (int subi = 0; subi < dim; subi++)
+            {
+                std::cout << subi + 1 << ". trim target = " << fn[subi] << std::endl;
+            }
+            std::cout << std::endl;
+            std::cout << "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" << std::endl;
+            std::cout << std::endl;
+        }
+        
     }
     std::cout << "Exceeded maximum iterations. No solution found. !" << std::endl;
 
@@ -1069,7 +1113,7 @@ void SolRotor::trimRotorNew() {
         targetVals[i] = TrimTargetsArray[i].targetVal;
     }
     
-    newtonMain(&SolRotor::rotateSteadyRotor, vars_init, vars_pointers, target_pointers, targetVals, dim);
+    newtonMain(&SolRotor::rotateSteadyRotor, vars_init, vars_pointers, target_pointers, targetVals, dim, true);
 
     std::cout << "New Trim Routine is done" << std::endl;
 }
